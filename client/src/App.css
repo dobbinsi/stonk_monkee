@@ -1,38 +1,123 @@
-.App {
-  text-align: center;
+.wrapper {
+  width: 980px;
+  margin: auto;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+span {
+  color: red;
+  font-weight: bold;
+  font-style: italic;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.header-main {
   display: flex;
-  flex-direction: column;
+  justify-content: space-between;
   align-items: center;
+  padding: 20px 20px 20px 20px;
+  color: gold;
+  background-color: black;
+  font-style: italic;
+}
+
+.brand-logo {
+  display: flex;
+}
+
+.nana-logo {
+  height: 80px;
+  width: 80px;
+  margin-right: 10px;
+  border-radius: 50px;
+}
+
+.nav-links {
+  color: gold;
+  margin-left: 20px;
+  text-decoration: none;
+  font-style: normal;
+}
+
+.nav-links:visited {
+  color: gold;
+  text-decoration: none;
+}
+
+.body-main {
+  background-color: lightgray;
+  min-height: 500px;
+  padding: 20px;
+}
+
+.body-content-login {
+  border: 2px solid gold;
+  background-color: whitesmoke;
+  width: 40%;
+  min-height: 300px;
+  margin: auto;
+  margin-top: 30px;
+  padding: 0px 20px 20px 20px;
+  border-radius: 10px;
+}
+
+.body-content-register {
+  border: 2px solid gold;
+  background-color: whitesmoke;
+  width: 100%;
+  min-height: 500px;
+  margin: auto;
+  margin-top: 30px;
+  padding: 0px 20px 20px 20px;
+  border-radius: 10px;
+}
+
+.form-labels {
+  width: 100%;
+  display: inline-block;
+  border-radius: 5px;
+  margin-bottom: 20px;
+}
+
+.login-input {
+  width: 95%;
+  display: inline-block;
+  border-radius: 5px;
+  padding: 10px;
+  margin-bottom: 20px;
+}
+
+.form-subclass {
+  width: 40%;
+  float: left;
+  border: 5px;
+  margin-bottom: 20px;
+}
+
+.center-button {
+  display: flex;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.hover-button {
+  background-color: black;
+  color: gold;
+  font-weight: bold;
+  padding: 10px;
+  margin-top: 10px;
+  border-radius: 5px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.hover-button:hover {
+  background-color: gold;
+  color: black;
+  font-weight: bold;
+  padding: 10px;
+  margin-top: 10px;
+  border-radius: 5px;
+}
+
+.logreg-links {
+  text-decoration: none;
+  font-style: normal;
+  margin-left: 30%;
+  color: black;
 }

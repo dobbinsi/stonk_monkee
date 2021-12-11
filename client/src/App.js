@@ -1,23 +1,28 @@
-import logo from './logo.svg';
+import React from 'react';
 import './App.css';
+import { Router } from '@reach/router';
+import DisplayAll from './components/DisplayAll';
+import Login from './components/Login';
+import Register from './components/Register';
+import CreateStonk from './components/CreateStonk';
+import PortfolioView from './components/PortfolioView';
+import DisplayOne from './components/DisplayOne';
+import UserProfile from './components/UserProfile';
+import UpdateUser from './components/UpdateUser';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="wrapper">
+      <Router>
+        <Login path="/" />
+        <Register path="/register" />
+        {/* <DisplayAll path="/stonks/home" />
+        <CreateStonk path="/stonks/new" />
+        <DisplayOne path="/stonks/:id" />
+        <UserProfile path="/users/:id" />
+        <PortfolioView path="/users/portfolio/:id" />
+        <UpdateUser path="/users/update/:id" /> */}
+      </Router>
     </div>
   );
 }
