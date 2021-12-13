@@ -83,7 +83,7 @@ module.exports = {
     },
 
     getOneUser: (req, res) => {
-        User.findOne({ _id: req.params.id })
+        User.findOne({ _id: req.params.userId })
             .then((oneUser) => {
                 console.log(oneUser);
                 res.json(oneUser);

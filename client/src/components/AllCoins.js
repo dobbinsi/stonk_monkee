@@ -9,8 +9,8 @@ const AllCoins = ({name, image, symbol, price, market_cap, id}) => {
             <div className="coin-row">
                 <div className="coin">
                     <img src={image} alt="coin" />
-                    <h1><Link to={`/stonks/${id}`} className='stonk-links'>{name}</Link></h1>
-                    <h2 className="coin-ticker">{symbol}</h2>
+                    <h2><Link to={`/stonks/${id}`} className='stonk-links'>{name}</Link></h2>
+                    <h3 className="coin-ticker">{symbol}</h3>
                 </div>
                 <div className="coin-data">
                     <h3 className="coin-price">${price.toFixed(2)}</h3>

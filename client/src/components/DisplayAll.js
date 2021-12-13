@@ -3,6 +3,7 @@ import axios from "axios";
 import { Link, navigate } from "@reach/router";
 import nanalogo from "../images/nanalogo.JPG";
 import AllCoins from "./AllCoins";
+import star from "../images/star_vector.png";
 
 const DisplayAll = (props) => {
     const [stonkList, setStonkList] = useState([]);
@@ -18,6 +19,15 @@ const DisplayAll = (props) => {
             .then((res) => {
                 setCoinData(res.data);
                 console.log(res.data);
+            })
+            .catch((err) => console.log(err));
+    }, []);
+    useEffect(() => {
+        axios.get("http://localhost:8000/api/stonks")
+            .then((res) => {
+                console.log(res);
+                console.log(res.data);
+                setStonkList(res.data);
             })
             .catch((err) => console.log(err));
     }, []);
@@ -48,6 +58,18 @@ const DisplayAll = (props) => {
             });
     };
 
+    const deleteStonk = (idFromBelow) => {
+        axios.delete(`http://localhost:8000/api/stonks/${idFromBelow}`)
+            .then((res) => {
+                console.log(res.data);
+                const newList = stonkList.filter((stonk, index) => stonk._id !== idFromBelow);
+                setStonkList(newList);
+            })
+            .catch((err) => {
+                console.log(err);
+            })
+    };
+
     return (
         <div>
             <div className="header-main">
@@ -73,6 +95,27 @@ const DisplayAll = (props) => {
                         </div>
                     </form>
                 </div>
+                {
+                    stonkList.map((stonk, index) => (
+                        <div key={index}>
+                            <div className="coin-container">
+                                <div className="coin-row">
+                                    <div className="coin">
+                                        <img src={stonk.logo} alt="coin" />
+                                        <h2><Link to={"/stonks/home"} className='stonk-links'>{stonk.stonkName}</Link></h2>
+                                        <h3 className="coin-ticker">{stonk.ticker}</h3>
+                                    </div>
+                                    <div className="coin-data">
+                                        <h3 className="coin-price">${stonk.price}</h3>
+                                        <p className="coin-marketcap">Market Cap: ${stonk.mktcap}</p>
+                                        <img src={star} className="star" />
+                                        <button class="delete-button" onClick={(e) => deleteStonk(stonk._id)}>Delete</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    ))
+                },
                 {
                     filteredCoins.map(coin => {
                         return (

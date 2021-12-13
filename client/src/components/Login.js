@@ -20,6 +20,8 @@ const Login = (props) => {
             },
         )
             .then((res) => {
+                console.log(res.data);
+                console.log(res.data.userId);
                 localStorage.setItem("userId", res.data.userId);
                 navigate("/stonks/home");
             })

@@ -52,11 +52,13 @@ span {
   color: black;
   margin-left: 20px;
   text-decoration: none;
+  font-weight: normal;
 }
 
 .stonk-links:visited {
   color: black;
   text-decoration: none;
+  font-weight: normal;
 }
 
 .body-main {
@@ -121,6 +123,7 @@ span {
   padding: 10px;
   margin-top: 10px;
   border-radius: 5px;
+  cursor: pointer;
 }
 
 .hover-button:hover {
@@ -130,6 +133,7 @@ span {
   padding: 10px;
   margin-top: 10px;
   border-radius: 5px;
+  cursor: pointer;
 }
 
 .logreg-links {
@@ -168,7 +172,7 @@ span {
   padding-right: 30px;
 }
 
-.coin h1 {
+.coin h2 {
   width: 500px;
   margin-right: 20px;
 }
@@ -177,10 +181,12 @@ span {
   height: 40px;
   width: 40px;
   margin-right: 5px;
+  border-radius: 10px;
 }
 
 .coin-ticker {
   text-transform: uppercase;
+  font-weight: normal;
 }
 
 .coin-data {
@@ -237,3 +243,26 @@ span {
   padding: 20px;
 }
 
+.price-change {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.price-table {
+  width: 100%;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+.red-numbers {
+  color: red;
+}
+
+.delete-button {
+  background-color: red;
+  color: whitesmoke;
+  border-radius: 10px;
+  margin-left: -20px;
+}

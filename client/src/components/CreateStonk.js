@@ -9,13 +9,17 @@ const CreateStonk = (props) => {
     const [stonkName, setStonkName] = useState("");
     const [ticker, setTicker] = useState("");
     const [logo, setLogo] = useState("");
+    const [price, setPrice] = useState("");
+    const [mktcap, setMktcap] = useState("");
     const createSubmitHandler = (e) => {
         e.preventDefault();
         axios.post(`http://localhost:8000/api/stonks/new`,
             {
                 stonkName,
                 ticker,
-                logo
+                logo,
+                price,
+                mktcap
             }, { withCredentials: true })
             .then((res) => {
                 console.log(res.data);
@@ -83,6 +87,24 @@ const CreateStonk = (props) => {
                             {
                                 errors.ticker ?
                                     <span>{errors.ticker.message}</span>
+                                    : null
+                            }
+                        </div>
+                        <div>
+                            <label className="form-labels">Current Price:</label>
+                            <input className="login-input" type="text" name="price" value={price} onChange={(e) => setPrice(e.target.value)} />
+                            {
+                                errors.price ?
+                                    <span>{errors.price.message}</span>
+                                    : null
+                            }
+                        </div>
+                        <div>
+                            <label className="form-labels">Market Cap:</label>
+                            <input className="login-input" type="text" name="mktcap" value={mktcap} onChange={(e) => setMktcap(e.target.value)} />
+                            {
+                                errors.mktcap ?
+                                    <span>{errors.mktcap.message}</span>
                                     : null
                             }
                         </div>

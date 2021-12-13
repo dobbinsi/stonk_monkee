@@ -11,6 +11,14 @@ const stonkSchema = new mongoose.Schema({
         required:[true, "All stonks must have a ticker symbol"],
         minlength: [2, "Ticker symbol must be at least 2 characters"],
     },
+    price: {
+        type: String,
+        required:[true, "What is the current price?"],
+    },
+    mktcap: {
+        type: String,
+        required:[true, "What is the current market cap?"],
+    },
     logo: {
         type: String,
         required:[true, "What does the logo look like?"],

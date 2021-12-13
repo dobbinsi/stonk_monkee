@@ -13,8 +13,11 @@ const DisplayOne = (props) => {
     const [priceData, setPriceData] = useState({});
     const [capData, setCapData] = useState({});
     const [chartData, setChartData] = useState([]);
-    const [days, setDays] = useState(1);
-
+    const [sevenData, setSevenData] = useState([]);
+    const [thirtyData, setThirtyData] = useState([]);
+    const [sixtyData, setSixtyData] = useState([]);
+    const [twoHundredData, setTwoHundredData] = useState([]);
+    const [oneYearData, setOneYearData] = useState([]);
     const [userId, setUserId] = useState("");
 
     useEffect(() => {
@@ -26,6 +29,11 @@ const DisplayOne = (props) => {
                 setImageData(res.data.image.small);
                 setPriceData(res.data.market_data.current_price);
                 setCapData(res.data.market_data.market_cap);
+                setSevenData(res.data.market_data.price_change_percentage_7d);
+                setThirtyData(res.data.market_data.price_change_percentage_30d);
+                setSixtyData(res.data.market_data.price_change_percentage_60d);
+                setTwoHundredData(res.data.market_data.price_change_percentage_200d);
+                setOneYearData(res.data.market_data.price_change_percentage_1y);
             })
             .catch((err) => console.log(err));
     }, []);
@@ -111,6 +119,44 @@ const DisplayOne = (props) => {
                             },
                         }}
                     />
+                </div>
+                <div className="price-change">
+                    <table className="price-table">
+                        <tr>
+                            <th>7d</th>
+                            <th>30d</th>
+                            <th>60d</th>
+                            <th>200d</th>
+                            <th>1y</th>
+                        </tr>
+                        <tr>
+                            {
+                                sevenData < 0 ?
+                                    <td className="red-numbers">{sevenData} %</td>
+                                    : <td>{sevenData} %</td>
+                            }
+                            {
+                                thirtyData < 0 ?
+                                    <td className="red-numbers">{thirtyData} %</td>
+                                    : <td>{thirtyData} %</td>
+                            }
+                            {
+                                sixtyData < 0 ?
+                                    <td className="red-numbers">{sixtyData} %</td>
+                                    : <td>{sixtyData} %</td>
+                            }
+                            {
+                                twoHundredData < 0 ?
+                                    <td className="red-numbers">{twoHundredData} %</td>
+                                    : <td>{twoHundredData} %</td>
+                            }
+                            {
+                                oneYearData < 0 ?
+                                    <td className="red-numbers">{oneYearData} %</td>
+                                    : <td>{oneYearData} %</td>
+                            }
+                        </tr>
+                    </table>
                 </div>
             </div>
         </div>
