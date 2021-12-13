@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
 const stonkSchema = new mongoose.Schema({
-    name: {
+    stonkName: {
         type: String,
         required: [true, "You must give this stonk a name!"],
         minlength: [3, "Stonk name must be at least 3 characters"],

@@ -9,6 +9,7 @@ import PortfolioView from './components/PortfolioView';
 import DisplayOne from './components/DisplayOne';
 import UserProfile from './components/UserProfile';
 import UpdateUser from './components/UpdateUser';
+import { Line } from "react-chartjs-2";
 
 function App() {
   return (
@@ -16,12 +17,12 @@ function App() {
       <Router>
         <Login path="/" />
         <Register path="/register" />
-        {/* <DisplayAll path="/stonks/home" />
+        <DisplayAll path="/stonks/home" />
         <CreateStonk path="/stonks/new" />
         <DisplayOne path="/stonks/:id" />
         <UserProfile path="/users/:id" />
         <PortfolioView path="/users/portfolio/:id" />
-        <UpdateUser path="/users/update/:id" /> */}
+        <UpdateUser path="/users/update/:id" />
       </Router>
     </div>
   );

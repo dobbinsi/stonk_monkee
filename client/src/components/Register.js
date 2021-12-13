@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { Link, navigate } from "@reach/router";
-import logo from "../images/nanalogo.JPG";
+import nanalogo from "../images/nanalogo.JPG";
 
 
 const Register = (props) => {
@@ -55,7 +55,7 @@ const Register = (props) => {
         <div>
             <div className="header-main">
                 <div className="brand-logo">
-                    <img src={logo} className="nana-logo" />
+                    <img src={nanalogo} className="nana-logo" />
                     <h1>StonkMonkee</h1>
                 </div>
                 <div>

@@ -1,3 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;800&display=swap');
+
+* {
+  font-family: "Montserrat";
+}
+
 .wrapper {
   width: 980px;
   margin: auto;
@@ -39,6 +45,17 @@ span {
 
 .nav-links:visited {
   color: gold;
+  text-decoration: none;
+}
+
+.stonk-links {
+  color: black;
+  margin-left: 20px;
+  text-decoration: none;
+}
+
+.stonk-links:visited {
+  color: black;
   text-decoration: none;
 }
 
@@ -121,3 +138,102 @@ span {
   margin-left: 30%;
   color: black;
 }
+
+.body-content-search {
+  width: 50%;
+  margin: auto;
+  margin-top: 10px;
+  padding: 0px 20px 20px 20px;
+  border-radius: 10px;
+}
+
+.coin-container {
+  display: flex;
+  justify-content: center;
+}
+
+.coin-row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  height: 100px;
+  width: 100%;
+  border-bottom: 1px solid black;
+}
+
+.coin {
+  display: flex;
+  align-items: center;
+  min-width: 300px;
+  padding-right: 30px;
+}
+
+.coin h1 {
+  width: 500px;
+  margin-right: 20px;
+}
+
+.coin img {
+  height: 40px;
+  width: 40px;
+  margin-right: 5px;
+}
+
+.coin-ticker {
+  text-transform: uppercase;
+}
+
+.coin-data {
+  display: flex;
+  justify-content: space-evenly;
+  text-align: center;
+  align-items:center;
+  width: 100%;
+}
+
+.coin-price {
+  width: 100px;
+  font-weight: normal;
+}
+
+.coin-marketcap{
+  width: 100px;
+}
+
+.star {
+  height: 20px;
+  width: 20px;
+}
+
+.name-ticker {
+  display: flex;
+  justify-content: left;
+  align-items: center;
+}
+
+.name-ticker h1 {
+  margin-right: 20px;
+}
+
+.img-details {
+  height: 40px;
+  width: 40px;
+  margin-right: 10px;
+  border-radius: 10px;
+}
+
+.big-price {
+  margin-left: 50px;
+  margin-top: -10px;
+}
+
+.big-mktcap {
+  margin-left: 50px;
+  margin-top: -10px;
+}
+
+.chart-area {
+  background-color: black;
+  padding: 20px;
+}
+
