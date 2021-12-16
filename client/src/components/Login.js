@@ -40,15 +40,15 @@ const Login = (props) => {
                 </div>
                 <div>
                     <div className="navbar">
+                        <Link to={"/"} className="nav-links">All Stonks</Link>
                         <Link to={"/"} className="nav-links">Add Stonks</Link>
                         <Link to={"/"} className="nav-links">My Portfolio</Link>
-                        <Link to={"/"} className="nav-links">All Stonks</Link>
                         <Link to={"/"} className="nav-links">Log Out</Link>
                     </div>
                 </div>
             </div>
             <div className="body-main">
-                <div className="body-content-login">
+                <div className="body-content-logreg">
                     <h1>Login</h1>
                     <span>{errorMessage ? errorMessage : ""}</span>
                     <form onSubmit={login}>

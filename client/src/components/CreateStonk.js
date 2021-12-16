@@ -61,15 +61,15 @@ const CreateStonk = (props) => {
                 </div>
                 <div>
                     <div className="navbar">
+                        <Link to={"/stonks/home"} className="nav-links">All Stonks</Link>
                         <Link to={"/stonks/new"} className="nav-links">Add Stonks</Link>
                         <Link to={`/users/portfolio/${userId}`} className="nav-links">My Portfolio</Link>
-                        <Link to={"/stonks/home"} className="nav-links">All Stonks</Link>
                         <Link to={"/"} className="nav-links" onClick={logout} >Log Out</Link>
                     </div>
                 </div>
             </div>
             <div className="body-main">
-                <div className="body-content-login">
+                <div className="body-content-logreg">
                     <h1>Add New Stonk</h1>
                     <form onSubmit={createSubmitHandler}>
                         <div>
@@ -91,7 +91,7 @@ const CreateStonk = (props) => {
                             }
                         </div>
                         <div>
-                            <label className="form-labels">Current Price:</label>
+                            <label className="form-labels">Current Price ($):</label>
                             <input className="login-input" type="text" name="price" value={price} onChange={(e) => setPrice(e.target.value)} />
                             {
                                 errors.price ?
@@ -100,7 +100,7 @@ const CreateStonk = (props) => {
                             }
                         </div>
                         <div>
-                            <label className="form-labels">Market Cap:</label>
+                            <label className="form-labels">Market Cap ($):</label>
                             <input className="login-input" type="text" name="mktcap" value={mktcap} onChange={(e) => setMktcap(e.target.value)} />
                             {
                                 errors.mktcap ?

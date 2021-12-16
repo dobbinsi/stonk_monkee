@@ -1,29 +1,14 @@
-import React, {useEffect, useState} from 'react'
+import React, { useEffect, useState } from 'react'
 import axios from "axios";
 import { Link, navigate } from "@reach/router";
 import nanalogo from "../images/nanalogo.JPG";
-
+import AllCoins from "./AllCoins";
 
 const UserProfile = (props) => {
+    const { userId } = props;
+    const [coinData, setCoinData] = useState([]);
     const [userStonkList, setUserStonkList] = useState([]);
     const [oneUser, setOneUser] = useState({});
-    const [userId, setUserId] = useState("");
-
-    useEffect(() => {
-        setUserId(localStorage.getItem("userId", userId));
-        console.log(localStorage.getItem("userId"));
-    }, []);
-    
-    // useEffect(() => {
-    //     axios.get(`http://localhost:8000/api/users/pirates/${id}`)
-    //         .then((res) => {
-    //             console.log(res.data);
-    //             setUserPirateList(res.data);
-    //         })
-    //         .catch((err) => {
-    //             console.log(err);
-    //         });
-    // }, []);
 
     useEffect(() => {
         axios.get(`http://localhost:8000/api/users/${userId}`)
@@ -34,6 +19,15 @@ const UserProfile = (props) => {
             .catch((err) => {
                 console.log(err);
             });
+    }, []);
+
+    useEffect(() => {
+        axios.get("https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=1&sparkline=false")
+            .then((res) => {
+                setCoinData(res.data);
+                console.log(res.data);
+            })
+            .catch((err) => console.log(err));
     }, []);
 
     const logout = (e) => {
@@ -54,18 +48,6 @@ const UserProfile = (props) => {
             });
     };
 
-    // const deletePirate = (idFromBelow) => {
-    //     axios.delete(`http://localhost:8000/api/pirates/${idFromBelow}`)
-    //         .then((res) => {
-    //             console.log(res.data);
-    //             const newList = pirateList.filter((pirate, index) => pirate._id !== idFromBelow);
-    //             setPirateList(newList);
-    //         })
-    //         .catch((err) => {
-    //             console.log(err);
-    //         })
-    // }
-
     return (
         <div>
             <div className="header-main">
@@ -75,12 +57,40 @@ const UserProfile = (props) => {
                 </div>
                 <div>
                     <div className="navbar">
+                        <Link to={"/stonks/home"} className="nav-links">All Stonks</Link>
                         <Link to={"/stonks/new"} className="nav-links">Add Stonks</Link>
                         <Link to={`/users/portfolio/${userId}`} className="nav-links">My Portfolio</Link>
-                        <Link to={"/stonks/home"} className="nav-links">All Stonks</Link>
                         <Link to={"/"} className="nav-links" onClick={logout} >Log Out</Link>
                     </div>
                 </div>
+            </div>
+            <div className="body-main">
+                <div className="username-edit">
+                    <h1>{oneUser.username}'s Profile</h1>
+                    <button className="edit-button"><Link to={`/users/update/${userId}`} className="edit-button">Edit Profile</Link></button>
+                </div>
+                <div className="body-profile">
+                    <div className="body-profile-pic">
+                        <img src={oneUser.picture} alt="user profile picture" />
+                    </div>
+                    <div className="profile-details">
+                        <div className="profile-details-text">
+                            <h1>About Me</h1>
+                            <h2>Trading Experience:</h2>
+                            <p>{oneUser.experience} years</p>
+                            <h2>Favorite Quote:</h2>
+                            <p>{oneUser.quote}</p>
+                        </div>
+                    </div>
+                </div>
+                <h1 className="port-header">Portfolio</h1>
+                {
+                    coinData.map(coin => {
+                        return (
+                            <AllCoins key={coin.id} id={coin.id} name={coin.name} image={coin.image} symbol={coin.symbol} market_cap={coin.market_cap} price={coin.current_price} />
+                        )
+                    })
+                }
             </div>
         </div>
     )

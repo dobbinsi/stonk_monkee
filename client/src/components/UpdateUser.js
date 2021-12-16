@@ -5,7 +5,7 @@ import nanalogo from "../images/nanalogo.JPG";
 
 
 const UpdateUser = (props) => {
-    const { id } = props;
+    const { userId } = props;
     const [errors, setErrors] = useState({});
     const [username, setUsername] = useState("");
     const [email, setEmail] = useState("");
@@ -16,7 +16,7 @@ const UpdateUser = (props) => {
     const [quote, setQuote] = useState("");
     
     useEffect(() => {
-        axios.get(`http://localhost:8000/api/users/${id}`)
+        axios.get(`http://localhost:8000/api/users/${userId}`)
             .then((res) => {
                 console.log(res.data);
                 setUsername(res.data.username);
@@ -30,11 +30,11 @@ const UpdateUser = (props) => {
             .catch((err) => {
                 console.log(err);
             })
-    }, [id])
+    }, [])
 
     const updateSubmitHandler = (e) => {
         e.preventDefault();
-        axios.put(`http://localhost:8000/api/users/update/${id}`,
+        axios.put(`http://localhost:8000/api/users/update/${userId}`,
             {
                 username,
                 email,
@@ -45,7 +45,7 @@ const UpdateUser = (props) => {
             })
             .then((res) => {
                 console.log(res.data);
-                navigate(`/users/${id}`);
+                navigate(`/users/${userId}`);
             })
             .catch((err) => {
                 console.log(err);
@@ -80,15 +80,15 @@ const UpdateUser = (props) => {
                 </div>
                 <div>
                     <div className="navbar">
-                        <Link to={"/"} className="nav-links">Add Stonks</Link>
-                        <Link to={"/"} className="nav-links">My Portfolio</Link>
-                        <Link to={"/"} className="nav-links">All Stonks</Link>
+                        <Link to={"/stonks/home"} className="nav-links">All Stonks</Link>
+                        <Link to={"/stonks/new"} className="nav-links">Add Stonks</Link>
+                        <Link to={`/users/portfolio/${userId}`} className="nav-links">My Portfolio</Link>
                         <Link to={"/"} className="nav-links">Log Out</Link>
                     </div>
                 </div>
             </div>
             <div className="body-main">
-                <div className="body-content-login">
+                <div className="body-content-logreg">
                     <h1>Edit Profile</h1>
                     <form onSubmit={updateSubmitHandler}>
                         <div>

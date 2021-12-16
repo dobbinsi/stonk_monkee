@@ -11,7 +11,7 @@ const DisplayAll = (props) => {
     const [coinData, setCoinData] = useState([]);
     const [search, setSearch] = useState("");
     useEffect(() => {
-        setUserId(localStorage.getItem("userId", userId));
+        setUserId(localStorage.getItem("userId"));
         console.log(localStorage.getItem("userId"));
     }, []);
     useEffect(() => {
@@ -79,9 +79,9 @@ const DisplayAll = (props) => {
                 </div>
                 <div>
                     <div className="navbar">
+                        <Link to={"/stonks/home"} className="nav-links">All Stonks</Link>
                         <Link to={"/stonks/new"} className="nav-links">Add Stonks</Link>
                         <Link to={`/users/portfolio/${userId}`} className="nav-links">My Portfolio</Link>
-                        <Link to={"/stonks/home"} className="nav-links">All Stonks</Link>
                         <Link to={"/"} className="nav-links" onClick={logout} >Log Out</Link>
                     </div>
                 </div>
@@ -115,7 +115,7 @@ const DisplayAll = (props) => {
                             </div>
                         </div>
                     ))
-                },
+                }
                 {
                     filteredCoins.map(coin => {
                         return (

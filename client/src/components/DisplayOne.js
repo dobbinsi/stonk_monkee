@@ -81,9 +81,9 @@ const DisplayOne = (props) => {
                 </div>
                 <div>
                     <div className="navbar">
+                        <Link to={"/stonks/home"} className="nav-links">All Stonks</Link>
                         <Link to={"/stonks/new"} className="nav-links">Add Stonks</Link>
                         <Link to={`/users/portfolio/${userId}`} className="nav-links">My Portfolio</Link>
-                        <Link to={"/stonks/home"} className="nav-links">All Stonks</Link>
                         <Link to={"/"} className="nav-links" onClick={logout} >Log Out</Link>
                     </div>
                 </div>
