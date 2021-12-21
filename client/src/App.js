@@ -14,7 +14,7 @@ import UserView from './view/UserView';
 
 function App() {
   return (
-    <div className="wrapper">
+    <div className='wrapper'>
       <Router>
         <Login path="/" />
         <Register path="/register" />

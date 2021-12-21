@@ -44,28 +44,35 @@ const Login = (props) => {
                         <Link to={"/"} className="nav-links">Add Stonks</Link>
                         <Link to={"/"} className="nav-links">My Portfolio</Link>
                         <Link to={"/"} className="nav-links">Log Out</Link>
+                        <select>
+                            <option value={"/"}>Navigation</option>
+                            <option value={"/"}>All Stonks</option>
+                            <option value={"/"}>Add Stonks</option>
+                            <option value={"/"}>My Portfolio</option>
+                            <option value={"/"}>Log Out</option>
+                        </select>
                     </div>
                 </div>
             </div>
             <div className="body-main">
                 <div className="body-content-logreg">
                     <h1>Login</h1>
-                    <span>{errorMessage ? errorMessage : ""}</span>
                     <form onSubmit={login}>
-                        <div>
+                        <div className="logregform">
                             <label className="form-labels">Email:</label>
                             <input className="login-input" type="text" name="email" value={email} onChange={(e) => setEmail(e.target.value)} />
                         </div>
-                        <div>
+                        <div className="logregform">
                             <label className="form-labels">Password:</label>
-                            <input className="login-input"type="password" name="password" value={password} onChange={(e) => setPassword(e.target.value)} />
+                            <input className="login-input" type="password" name="password" value={password} onChange={(e) => setPassword(e.target.value)} />
+                            <span>{errorMessage ? errorMessage : ""}</span>
                         </div>
                         <div className="center-button">
                             <button class="hover-button" type="submit">Login!</button>
                         </div>
                     </form>
                 </div>
-            <Link to={"/register"} className="logreg-links">New user? Register here!</Link>
+                <Link to={"/register"} className="logreg-links">New user? Register here!</Link>
             </div>
         </div>
     )

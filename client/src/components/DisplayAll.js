@@ -83,14 +83,21 @@ const DisplayAll = (props) => {
                         <Link to={"/stonks/new"} className="nav-links">Add Stonks</Link>
                         <Link to={`/users/portfolio/${userId}`} className="nav-links">My Portfolio</Link>
                         <Link to={"/"} className="nav-links" onClick={logout} >Log Out</Link>
+                        <select>
+                            <option value={"/"}>Navigation</option>
+                            <option value={"/stonks/home"}>All Stonks</option>
+                            <option value={"/stonks/new"}>Add Stonks</option>
+                            <option value={`/users/portfolio/${userId}`}>My Portfolio</option>
+                            <option value={"/"} onClick={logout}>Log Out</option>
+                        </select>
                     </div>
                 </div>
             </div>
             <div class="body-main">
                 <div className="body-content-search">
                     <h1>Find your favorite stonks!</h1>
-                    <form>
-                        <div>
+                    <form className="search-form">
+                        <div className="search-form">
                             <input className="login-input" type="text" placeholder="Search by Name..." onChange={handleChange} />
                         </div>
                     </form>

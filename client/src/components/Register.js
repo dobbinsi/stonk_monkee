@@ -64,6 +64,13 @@ const Register = (props) => {
                         <Link to={"/"} className="nav-links">Add Stonks</Link>
                         <Link to={"/"} className="nav-links">My Portfolio</Link>
                         <Link to={"/"} className="nav-links">Log Out</Link>
+                        <select>
+                            <option value={"/"}>Navigation</option>
+                            <option value={"/"}>All Stonks</option>
+                            <option value={"/"}>Add Stonks</option>
+                            <option value={"/"}>My Portfolio</option>
+                            <option value={"/"}>Log Out</option>
+                        </select>
                     </div>
                 </div>
             </div>
@@ -72,7 +79,7 @@ const Register = (props) => {
                     <h1>Register</h1>
                     {confirmReg ? <h4>{confirmReg}</h4> : null}
                     <form onSubmit={register}>
-                        <div>
+                        <div className="logregform">
                             <label className="form-labels">Username:</label>
                             <input className="login-input" type="text" name="username" value={user.username} onChange={handleChange} />
                             {errors.username ? (
@@ -81,7 +88,7 @@ const Register = (props) => {
                                 </span>
                             ) : null}
                         </div>
-                        <div>
+                        <div className="logregform">
                             <label className="form-labels">Email:</label>
                             <input className="login-input" type="text" name="email" value={user.email} onChange={handleChange} />
                             {errors.email ? (
@@ -90,7 +97,7 @@ const Register = (props) => {
                                 </span>
                             ) : null}
                         </div>
-                        <div>
+                        <div className="logregform">
                             <label className="form-labels">Password:</label>
                             <input className="login-input" type="password" name="password" value={user.password} onChange={handleChange} />
                             {errors.password ? (
@@ -99,7 +106,7 @@ const Register = (props) => {
                                 </span>
                             ) : null}
                         </div>
-                        <div>
+                        <div className="logregform">
                             <label className="form-labels">Confirm Password:</label>
                             <input className="login-input" type="password" name="confirmPassword" value={user.confirmPassword} onChange={handleChange} />
                             {errors.confirmPassword ? (
@@ -108,7 +115,7 @@ const Register = (props) => {
                                 </span>
                             ) : null}
                         </div>
-                        <div>
+                        <div className="logregform">
                             <label className="form-labels">Profile Picture (Img URL):</label>
                             <input className="login-input" type="text" name="picture" value={user.picture} onChange={handleChange} />
                             {errors.picture ? (
@@ -117,7 +124,7 @@ const Register = (props) => {
                                 </span>
                             ) : null}
                         </div>
-                        <div>
+                        <div className="logregform">
                             <label className="form-labels">Trading Experience (yrs):</label>
                             <input className="login-input" type="number" name="experience" value={user.experience} onChange={handleChange} />
                             {errors.experience ? (
@@ -126,7 +133,7 @@ const Register = (props) => {
                                 </span>
                             ) : null}
                         </div>
-                        <div>
+                        <div className="logregform">
                             <label className="form-labels">Favorite Quote:</label>
                             <textarea className="login-input" rows="4" type="text" name="quote" value={user.quote} onChange={handleChange} />
                             {errors.quote ? (

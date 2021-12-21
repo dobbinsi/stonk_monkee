@@ -1,6 +1,6 @@
 import React from 'react';
 import star from "../images/star_vector.png";
-import { Link, navigate } from "@reach/router";
+import { Link } from "@reach/router";
 
 
 const AllCoins = ({name, image, symbol, price, market_cap, id}) => {

@@ -65,6 +65,13 @@ const CreateStonk = (props) => {
                         <Link to={"/stonks/new"} className="nav-links">Add Stonks</Link>
                         <Link to={`/users/portfolio/${userId}`} className="nav-links">My Portfolio</Link>
                         <Link to={"/"} className="nav-links" onClick={logout} >Log Out</Link>
+                        <select>
+                            <option value={"/"}>Navigation</option>
+                            <option value={"/stonks/home"}>All Stonks</option>
+                            <option value={"/stonks/new"}>Add Stonks</option>
+                            <option value={`/users/portfolio/${userId}`}>My Portfolio</option>
+                            <option value={"/"} onClick={logout}>Log Out</option>
+                        </select>
                     </div>
                 </div>
             </div>
@@ -72,7 +79,7 @@ const CreateStonk = (props) => {
                 <div className="body-content-logreg">
                     <h1>Add New Stonk</h1>
                     <form onSubmit={createSubmitHandler}>
-                        <div>
+                        <div className="logregform">
                             <label className="form-labels">Name:</label>
                             <input onChange={(e) => setStonkName(e.target.value)} className="login-input" type="text" name="stonkName" value={stonkName} />
                             {
@@ -81,7 +88,7 @@ const CreateStonk = (props) => {
                                     : null
                             }
                         </div>
-                        <div>
+                        <div className="logregform">
                             <label className="form-labels">Ticker Symbol:</label>
                             <input className="login-input" type="text" name="ticker" value={ticker} onChange={(e) => setTicker(e.target.value)} />
                             {
@@ -90,7 +97,7 @@ const CreateStonk = (props) => {
                                     : null
                             }
                         </div>
-                        <div>
+                        <div className="logregform">
                             <label className="form-labels">Current Price ($):</label>
                             <input className="login-input" type="text" name="price" value={price} onChange={(e) => setPrice(e.target.value)} />
                             {
@@ -99,7 +106,7 @@ const CreateStonk = (props) => {
                                     : null
                             }
                         </div>
-                        <div>
+                        <div className="logregform">
                             <label className="form-labels">Market Cap ($):</label>
                             <input className="login-input" type="text" name="mktcap" value={mktcap} onChange={(e) => setMktcap(e.target.value)} />
                             {
@@ -108,7 +115,7 @@ const CreateStonk = (props) => {
                                     : null
                             }
                         </div>
-                        <div>
+                        <div className="logregform">
                             <label className="form-labels">Logo (Img URL):</label>
                             <input className="login-input" type="text" name="logo" value={logo} onChange={(e) => setLogo(e.target.value)} />
                             {

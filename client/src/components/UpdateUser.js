@@ -84,6 +84,13 @@ const UpdateUser = (props) => {
                         <Link to={"/stonks/new"} className="nav-links">Add Stonks</Link>
                         <Link to={`/users/portfolio/${userId}`} className="nav-links">My Portfolio</Link>
                         <Link to={"/"} className="nav-links">Log Out</Link>
+                        <select>
+                            <option value={"/"}>Navigation</option>
+                            <option value={"/stonks/home"}>All Stonks</option>
+                            <option value={"/stonks/new"}>Add Stonks</option>
+                            <option value={`/users/portfolio/${userId}`}>My Portfolio</option>
+                            <option value={"/"} onClick={logout}>Log Out</option>
+                        </select>
                     </div>
                 </div>
             </div>
@@ -91,7 +98,7 @@ const UpdateUser = (props) => {
                 <div className="body-content-logreg">
                     <h1>Edit Profile</h1>
                     <form onSubmit={updateSubmitHandler}>
-                        <div>
+                        <div className="logregform">
                             <label className="form-labels">Username:</label>
                             <input className="login-input" type="text" name="username" value={username} onChange={(e) => setUsername(e.target.value)} />
                             {errors.username ? (
@@ -100,7 +107,7 @@ const UpdateUser = (props) => {
                                 </span>
                             ) : null}
                         </div>
-                        <div>
+                        <div className="logregform">
                             <label className="form-labels">Email:</label>
                             <input className="login-input" type="text" name="email" value={email} onChange={(e) => setEmail(e.target.value)} />
                             {errors.email ? (
@@ -109,7 +116,7 @@ const UpdateUser = (props) => {
                                 </span>
                             ) : null}
                         </div>
-                        <div>
+                        <div className="logregform">
                             <label className="form-labels">Password:</label>
                             <input className="login-input" type="password" name="password" value={password} onChange={(e) => setPassword(e.target.value)} />
                             {errors.password ? (
@@ -118,7 +125,7 @@ const UpdateUser = (props) => {
                                 </span>
                             ) : null}
                         </div>
-                        <div>
+                        <div className="logregform">
                             <label className="form-labels">Confirm Password:</label>
                             <input className="login-input" type="password" name="confirmPassword" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} />
                             {errors.confirmPassword ? (
@@ -127,7 +134,7 @@ const UpdateUser = (props) => {
                                 </span>
                             ) : null}
                         </div>
-                        <div>
+                        <div className="logregform">
                             <label className="form-labels">Profile Picture (Img URL):</label>
                             <input className="login-input" type="text" name="picture" value={picture} onChange={(e) => setPicture(e.target.value)} />
                             {errors.picture ? (
@@ -136,7 +143,7 @@ const UpdateUser = (props) => {
                                 </span>
                             ) : null}
                         </div>
-                        <div>
+                        <div className="logregform">
                             <label className="form-labels">Trading Experience (yrs):</label>
                             <input className="login-input" type="number" name="experience" value={experience} onChange={(e) => setExperience(e.target.value)} />
                             {errors.experience ? (
@@ -145,7 +152,7 @@ const UpdateUser = (props) => {
                                 </span>
                             ) : null}
                         </div>
-                        <div>
+                        <div className="logregform">
                             <label className="form-labels">Favorite Quote:</label>
                             <textarea className="login-input" rows="4" type="text" name="quote" value={quote} onChange={(e) => setQuote(e.target.value)} />
                             {errors.quote ? (
