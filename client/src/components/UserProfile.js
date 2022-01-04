@@ -3,8 +3,8 @@ import axios from "axios";
 import { NavLink as Link } from "react-router-dom";
 import Header from './Header';
 import { useParams } from "react-router-dom";
-
 import AllCoins from "./AllCoins";
+
 
 const UserProfile = () => {
     const { userId } = useParams();
@@ -47,7 +47,11 @@ const UserProfile = () => {
             <div className="body-main">
                 <div className="username-edit">
                     <h1>{oneUser.username}'s Profile</h1>
-                    <button className="edit-button"><Link to={`/users/update/${userId}`} className="edit-button">Edit Profile</Link></button>
+                    <div>
+                        <Link to={`/users/update/${userId}`} className="edit-button">
+                            <i className='fas fa-edit' />
+                        </Link>
+                    </div>
                 </div>
                 <div className="body-profile">
                     <div className="body-profile-pic">
@@ -67,7 +71,15 @@ const UserProfile = () => {
                 {
                     coinData.map(coin => {
                         return (
-                            <AllCoins key={coin.id} id={coin.id} name={coin.name} image={coin.image} symbol={coin.symbol} market_cap={coin.market_cap} price={coin.current_price} />
+                            <AllCoins
+                                key={coin.id}
+                                id={coin.id}
+                                name={coin.name}
+                                image={coin.image}
+                                symbol={coin.symbol}
+                                market_cap={coin.market_cap}
+                                price={coin.current_price}
+                            />
                         )
                     })
                 }

@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
-import { NavLink as Link } from "react-router-dom";
 import Header from "./Header";
 import { Line } from "react-chartjs-2";
 import { Chart as ChartJS } from 'chart.js/auto'
@@ -54,7 +53,6 @@ const DisplayOne = () => {
         setUserId(localStorage.getItem("userId"));
         console.log(localStorage.getItem("userId"));
     }, []);
-
 
     return (
         <div>

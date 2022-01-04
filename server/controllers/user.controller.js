@@ -96,13 +96,13 @@ module.exports = {
 
     updateUser: (req, res) => {
         User.findOneAndUpdate(
-            { _id: req.params.id },
+            { _id: req.params.userId },
             req.body,
             { new: true, runValidators: true }
         )
             .then((updatedUser) => {
                 console.log(updatedUser);
-                res.json(updatedUser);
+                res.json({user: updatedUser});
             })
             .catch((err) => {
                 console.log("updateUser failed...");

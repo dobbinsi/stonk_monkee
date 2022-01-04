@@ -4,6 +4,7 @@ import { NavLink as Link } from "react-router-dom";
 import Header from "./Header";
 import AllCoins from "./AllCoins";
 
+
 const DisplayAll = () => {
     const [stonkList, setStonkList] = useState([]);
     const [userId, setUserId] = useState("");
@@ -105,7 +106,15 @@ const DisplayAll = () => {
                 {
                     filteredCoins.map(coin => {
                         return (
-                            <AllCoins key={coin.id} id={coin.id} name={coin.name} image={coin.image} symbol={coin.symbol} market_cap={coin.market_cap} price={coin.current_price} />
+                            <AllCoins
+                                key={coin.id}
+                                id={coin.id}
+                                name={coin.name}
+                                image={coin.image}
+                                symbol={coin.symbol}
+                                market_cap={coin.market_cap}
+                                price={coin.current_price}
+                            />
                         )
                     })
                 }
