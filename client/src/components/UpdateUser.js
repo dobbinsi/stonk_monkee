@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { Link, navigate } from "@reach/router";
-import nanalogo from "../images/nanalogo.JPG";
+import { NavLink as Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
+import Header from "./Header";
 
-
-const UpdateUser = (props) => {
-    const { userId } = props;
+const UpdateUser = () => {
+    const { userId } = useParams();
     const [errors, setErrors] = useState({});
     const [username, setUsername] = useState("");
     const [email, setEmail] = useState("");
@@ -14,7 +15,8 @@ const UpdateUser = (props) => {
     const [picture, setPicture] = useState("");
     const [experience, setExperience] = useState("");
     const [quote, setQuote] = useState("");
-    
+    const navigate = useNavigate();
+
     useEffect(() => {
         axios.get(`http://localhost:8000/api/users/${userId}`)
             .then((res) => {
@@ -53,47 +55,19 @@ const UpdateUser = (props) => {
             })
     };
 
-    const logout = (e) => {
-        e.preventDefault();
-        axios.post("http://localhost:8000/api/users/logout",
-            {},
-            {
-                withCredentials: true,
-            },
-        )
-            .then((res) => {
-                console.log(res.data);
-                localStorage.removeItem("userId");
-                navigate("/");
-            })
-            .catch((err) => {
-                console.log(err);
-            });
-    };
 
     return (
         <div>
-            <div className="header-main">
-                <div className="brand-logo">
-                    <img src={nanalogo} className="nana-logo" />
-                    <h1>StonkMonkee</h1>
-                </div>
-                <div>
-                    <div className="navbar">
-                        <Link to={"/stonks/home"} className="nav-links">All Stonks</Link>
-                        <Link to={"/stonks/new"} className="nav-links">Add Stonks</Link>
-                        <Link to={`/users/portfolio/${userId}`} className="nav-links">My Portfolio</Link>
-                        <Link to={"/"} className="nav-links">Log Out</Link>
-                        <select>
-                            <option value={"/"}>Navigation</option>
-                            <option value={"/stonks/home"}>All Stonks</option>
-                            <option value={"/stonks/new"}>Add Stonks</option>
-                            <option value={`/users/portfolio/${userId}`}>My Portfolio</option>
-                            <option value={"/"} onClick={logout}>Log Out</option>
-                        </select>
-                    </div>
-                </div>
-            </div>
+            <Header
+                linkOne={"/stonks/home"}
+                textOne={"All Stonks"}
+                linkTwo={"/stonks/new"}
+                textTwo={"Add Stonks"}
+                linkThree={`/users/portfolio/${userId}`}
+                textThree={"My Portfolio"}
+                linkFour={"/"}
+                textFour={"Log Out"}
+            />
             <div className="body-main">
                 <div className="body-content-logreg">
                     <h1>Edit Profile</h1>

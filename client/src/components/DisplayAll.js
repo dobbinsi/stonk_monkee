@@ -1,27 +1,31 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { Link, navigate } from "@reach/router";
-import nanalogo from "../images/nanalogo.JPG";
+import { NavLink as Link } from "react-router-dom";
+import Header from "./Header";
 import AllCoins from "./AllCoins";
-import star from "../images/star_vector.png";
 
-const DisplayAll = (props) => {
+const DisplayAll = () => {
     const [stonkList, setStonkList] = useState([]);
     const [userId, setUserId] = useState("");
     const [coinData, setCoinData] = useState([]);
     const [search, setSearch] = useState("");
+    const [click, setClick] = useState(false);
+    const handleClick = () => setClick(!click);
+
     useEffect(() => {
         setUserId(localStorage.getItem("userId"));
         console.log(localStorage.getItem("userId"));
     }, []);
+
     useEffect(() => {
-        axios.get("https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=1&sparkline=false")
+        axios.get("https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=2000&page=1&sparkline=false")
             .then((res) => {
                 setCoinData(res.data);
                 console.log(res.data);
             })
             .catch((err) => console.log(err));
     }, []);
+
     useEffect(() => {
         axios.get("http://localhost:8000/api/stonks")
             .then((res) => {
@@ -40,24 +44,6 @@ const DisplayAll = (props) => {
         coin.name.toLowerCase().includes(search.toLowerCase())
     );
 
-    const logout = (e) => {
-        e.preventDefault();
-        axios.post("http://localhost:8000/api/users/logout",
-            {},
-            {
-                withCredentials: true,
-            },
-        )
-            .then((res) => {
-                console.log(res.data);
-                localStorage.removeItem("userId");
-                navigate("/");
-            })
-            .catch((err) => {
-                console.log(err);
-            });
-    };
-
     const deleteStonk = (idFromBelow) => {
         axios.delete(`http://localhost:8000/api/stonks/${idFromBelow}`)
             .then((res) => {
@@ -72,27 +58,16 @@ const DisplayAll = (props) => {
 
     return (
         <div>
-            <div className="header-main">
-                <div className="brand-logo">
-                    <img src={nanalogo} className="nana-logo" />
-                    <h1>StonkMonkee</h1>
-                </div>
-                <div>
-                    <div className="navbar">
-                        <Link to={"/stonks/home"} className="nav-links">All Stonks</Link>
-                        <Link to={"/stonks/new"} className="nav-links">Add Stonks</Link>
-                        <Link to={`/users/portfolio/${userId}`} className="nav-links">My Portfolio</Link>
-                        <Link to={"/"} className="nav-links" onClick={logout} >Log Out</Link>
-                        <select>
-                            <option value={"/"}>Navigation</option>
-                            <option value={"/stonks/home"}>All Stonks</option>
-                            <option value={"/stonks/new"}>Add Stonks</option>
-                            <option value={`/users/portfolio/${userId}`}>My Portfolio</option>
-                            <option value={"/"} onClick={logout}>Log Out</option>
-                        </select>
-                    </div>
-                </div>
-            </div>
+            <Header
+                linkOne={"/stonks/home"}
+                textOne={"All Stonks"}
+                linkTwo={"/stonks/new"}
+                textTwo={"Add Stonks"}
+                linkThree={`/users/portfolio/${userId}`}
+                textThree={"My Portfolio"}
+                linkFour={"/"}
+                textFour={"Log Out"}
+            />
             <div class="body-main">
                 <div className="body-content-search">
                     <h1>Find your favorite stonks!</h1>
@@ -115,8 +90,12 @@ const DisplayAll = (props) => {
                                     <div className="coin-data">
                                         <h3 className="coin-price">${stonk.price}</h3>
                                         <p className="coin-marketcap">Market Cap: ${stonk.mktcap}</p>
-                                        <img src={star} className="star" />
-                                        <button class="delete-button" onClick={(e) => deleteStonk(stonk._id)}>Delete</button>
+                                        <div className='fav-star' onClick={handleClick}>
+                                            <i className={click ? 'fas fa-star' : 'far fa-star'} />
+                                        </div>
+                                        <div className='trashcan' onClick={(e) => deleteStonk(stonk._id)}>
+                                            <i className='fas fa-trash-alt' />
+                                        </div>
                                     </div>
                                 </div>
                             </div>

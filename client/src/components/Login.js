@@ -1,13 +1,16 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { Link, navigate } from "@reach/router";
-import logo from "../images/nanalogo.JPG";
+import { NavLink as Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import Header from "./Header";
 
 
-const Login = (props) => {
+const Login = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [errorMessage, setErrorMessage] = useState("");
+    const navigate = useNavigate();
+
     const login = (event) => {
         event.preventDefault();
         axios.post("http://localhost:8000/api/users/login",
@@ -33,27 +36,16 @@ const Login = (props) => {
 
     return (
         <div>
-            <div className="header-main">
-                <div className="brand-logo">
-                    <img src={logo} className="nana-logo" />
-                    <h1>StonkMonkee</h1>
-                </div>
-                <div>
-                    <div className="navbar">
-                        <Link to={"/"} className="nav-links">All Stonks</Link>
-                        <Link to={"/"} className="nav-links">Add Stonks</Link>
-                        <Link to={"/"} className="nav-links">My Portfolio</Link>
-                        <Link to={"/"} className="nav-links">Log Out</Link>
-                        <select>
-                            <option value={"/"}>Navigation</option>
-                            <option value={"/"}>All Stonks</option>
-                            <option value={"/"}>Add Stonks</option>
-                            <option value={"/"}>My Portfolio</option>
-                            <option value={"/"}>Log Out</option>
-                        </select>
-                    </div>
-                </div>
-            </div>
+            <Header
+                linkOne={"/."}
+                textOne={"All Stonks"}
+                linkTwo={"/."}
+                textTwo={"Add Stonks"}
+                linkThree={"/."}
+                textThree={"My Portfolio"}
+                linkFour={"/."}
+                textFour={"Log Out"}
+            />
             <div className="body-main">
                 <div className="body-content-logreg">
                     <h1>Login</h1>

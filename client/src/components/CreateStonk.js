@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { Link, navigate } from "@reach/router";
-import nanalogo from "../images/nanalogo.JPG";
+import { NavLink as Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import Header from "./Header";
 
-const CreateStonk = (props) => {
+const CreateStonk = () => {
     const [errors, setErrors] = useState({});
     const [userId, setUserId] = useState("");
     const [stonkName, setStonkName] = useState("");
@@ -11,6 +12,9 @@ const CreateStonk = (props) => {
     const [logo, setLogo] = useState("");
     const [price, setPrice] = useState("");
     const [mktcap, setMktcap] = useState("");
+    const navigate = useNavigate();
+
+
     const createSubmitHandler = (e) => {
         e.preventDefault();
         axios.post(`http://localhost:8000/api/stonks/new`,
@@ -30,23 +34,7 @@ const CreateStonk = (props) => {
                 setErrors(err.response.data.errors);
             })
     };
-    const logout = (e) => {
-        e.preventDefault();
-        axios.post("http://localhost:8000/api/users/logout",
-            {},
-            {
-                withCredentials: true,
-            },
-        )
-            .then((res) => {
-                console.log(res.data);
-                localStorage.removeItem("userId");
-                navigate("/");
-            })
-            .catch((err) => {
-                console.log(err);
-            });
-    };
+
     useEffect(() => {
         setUserId(localStorage.getItem("userId", userId));
         console.log(localStorage.getItem("userId"));
@@ -54,27 +42,16 @@ const CreateStonk = (props) => {
 
     return (
         <div>
-            <div className="header-main">
-                <div className="brand-logo">
-                    <img src={nanalogo} className="nana-logo" />
-                    <h1>StonkMonkee</h1>
-                </div>
-                <div>
-                    <div className="navbar">
-                        <Link to={"/stonks/home"} className="nav-links">All Stonks</Link>
-                        <Link to={"/stonks/new"} className="nav-links">Add Stonks</Link>
-                        <Link to={`/users/portfolio/${userId}`} className="nav-links">My Portfolio</Link>
-                        <Link to={"/"} className="nav-links" onClick={logout} >Log Out</Link>
-                        <select>
-                            <option value={"/"}>Navigation</option>
-                            <option value={"/stonks/home"}>All Stonks</option>
-                            <option value={"/stonks/new"}>Add Stonks</option>
-                            <option value={`/users/portfolio/${userId}`}>My Portfolio</option>
-                            <option value={"/"} onClick={logout}>Log Out</option>
-                        </select>
-                    </div>
-                </div>
-            </div>
+            <Header
+                linkOne={"/stonks/home"}
+                textOne={"All Stonks"}
+                linkTwo={"/stonks/new"}
+                textTwo={"Add Stonks"}
+                linkThree={`/users/portfolio/${userId}`}
+                textThree={"My Portfolio"}
+                linkFour={"/"}
+                textFour={"Log Out"}
+            />
             <div className="body-main">
                 <div className="body-content-logreg">
                     <h1>Add New Stonk</h1>

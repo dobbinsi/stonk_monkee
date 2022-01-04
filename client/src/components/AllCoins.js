@@ -1,9 +1,12 @@
-import React from 'react';
-import star from "../images/star_vector.png";
-import { Link } from "@reach/router";
+import React, { useState } from 'react';
+import { NavLink as Link } from 'react-router-dom';
 
 
 const AllCoins = ({name, image, symbol, price, market_cap, id}) => {
+    const [click, setClick] = useState(false);
+    const handleClick = () => setClick(!click);
+// ^^ NEED TO MODIFY HANDLECLICK => ADD TO FAVORITE LIST 
+
     return (
         <div className="coin-container">
             <div className="coin-row">
@@ -15,7 +18,9 @@ const AllCoins = ({name, image, symbol, price, market_cap, id}) => {
                 <div className="coin-data">
                     <h3 className="coin-price">${price.toFixed(2)}</h3>
                     <p className="coin-marketcap">Market Cap: ${market_cap.toLocaleString()}</p>
-                    <img src={star} className="star"/>
+                    <div className='fav-star' onClick={handleClick}>
+                        <i  className={click? 'fas fa-star' : 'far fa-star'} />
+                    </div>
                 </div>
             </div>
         </div>

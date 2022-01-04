@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 import axios from "axios";
-import { Link, navigate } from "@reach/router";
-import nanalogo from "../images/nanalogo.JPG";
+import { NavLink as Link } from "react-router-dom";
+import Header from "./Header";
 import { Line } from "react-chartjs-2";
 import { Chart as ChartJS } from 'chart.js/auto'
 
 
-const DisplayOne = (props) => {
-    const { id } = props;
+const DisplayOne = () => {
+    const { id } = useParams();
     const [stonk, setStonk] = useState({});
     const [imageData, setImageData] = useState({});
     const [priceData, setPriceData] = useState({});
@@ -50,51 +51,23 @@ const DisplayOne = (props) => {
     }, []);
 
     useEffect(() => {
-        setUserId(localStorage.getItem("userId", userId));
+        setUserId(localStorage.getItem("userId"));
         console.log(localStorage.getItem("userId"));
     }, []);
 
-    const logout = (e) => {
-        e.preventDefault();
-        axios.post("http://localhost:8000/api/users/logout",
-            {},
-            {
-                withCredentials: true,
-            },
-        )
-            .then((res) => {
-                console.log(res.data);
-                localStorage.removeItem("userId");
-                navigate("/");
-            })
-            .catch((err) => {
-                console.log(err);
-            });
-    };
 
     return (
         <div>
-            <div className="header-main">
-                <div className="brand-logo">
-                    <img src={nanalogo} className="nana-logo" />
-                    <h1>StonkMonkee</h1>
-                </div>
-                <div>
-                    <div className="navbar">
-                        <Link to={"/stonks/home"} className="nav-links">All Stonks</Link>
-                        <Link to={"/stonks/new"} className="nav-links">Add Stonks</Link>
-                        <Link to={`/users/portfolio/${userId}`} className="nav-links">My Portfolio</Link>
-                        <Link to={"/"} className="nav-links" onClick={logout} >Log Out</Link>
-                        <select>
-                            <option value={"/"}>Navigation</option>
-                            <option value={"/stonks/home"}>All Stonks</option>
-                            <option value={"/stonks/new"}>Add Stonks</option>
-                            <option value={`/users/portfolio/${userId}`}>My Portfolio</option>
-                            <option value={"/"} onClick={logout}>Log Out</option>
-                        </select>
-                    </div>
-                </div>
-            </div>
+            <Header
+                linkOne={"/stonks/home"}
+                textOne={"All Stonks"}
+                linkTwo={"/stonks/new"}
+                textTwo={"Add Stonks"}
+                linkThree={`/users/portfolio/${userId}`}
+                textThree={"My Portfolio"}
+                linkFour={"/"}
+                textFour={"Log Out"}
+            />
             <div className="body-main">
                 <div className="name-ticker">
                     <img src={imageData} alt="coin" className="img-details" />
