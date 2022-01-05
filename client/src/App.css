@@ -4,34 +4,52 @@
   font-family: "Montserrat";
   margin: 0px;
   padding: 0px;
-  background-color: black;
+}
+
+body {
+  background-color: #121212;
 }
 
 .wrapper {
-  width: 80%;
+  width: 85%;
   margin: auto;
+  background-color: transparent;
 }
 
 span {
   color: red;
   font-weight: bold;
   font-style: italic;
-  background-color: whitesmoke;
 }
 
 .header-main {
-  display: flex;
-  justify-content: space-between;
   align-items: center;
   padding: 20px 0px;
   color: gold;
-  background-color: black;
-  font-style: italic;
+  background-color: #121212;
+}
+
+.navbar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .brand-logo {
   display: flex;
+  justify-content: flex-start;
+  min-width: fit-content;
   align-items: center;
+}
+
+.navbar-logo {
+  color: gold;
+  justify-self: start;
+  cursor: pointer;
+  text-decoration: none;
+  font-style: italic;
+  font-size: 2rem;
+  min-width: fit-content;
 }
 
 .nana-logo {
@@ -39,26 +57,29 @@ span {
   width: 80px;
   margin-right: 10px;
   border-radius: 50px;
-}
-
-.navbar select {
-  display: none;
-  font-size: large;
   cursor: pointer;
-  color: gold;
-  border-color: transparent;
 }
 
-@media (max-width: 995px) {
-  .navbar a {display: none;}
-  .navbar select {display: inline-block;}
+.nav-menu {
+  display: grid;
+  justify-content: end;
+  grid-template-columns: repeat(5, auto);
+  grid-gap: 10px;
+  list-style: none;
+  text-align: center;
+  width: 70%;
+}
+
+.nav-item {
+  display: flex;
+  align-items: center;
 }
 
 .nav-links {
   color: gold;
   margin-left: 20px;
   text-decoration: none;
-  font-style: normal;
+  font-size: large;
 }
 
 .nav-links:visited {
@@ -66,19 +87,173 @@ span {
   text-decoration: none;
 }
 
+.nav-links:hover {
+  color: black;
+  background: gold;
+  padding: 10px;
+  border-radius: 10px;
+  transition: all 0.2s ease-out;
+  font-weight: bold;
+}
+
+.nav-links.active {
+  color: black;
+  background: gold;
+  padding: 10px;
+  border-radius: 10px;
+  transition: all 0.2s ease-out;
+  font-weight: bold;
+}
+
+.fa-bars {
+  color: gold;
+  font-size: 2rem;
+}
+
+.fa-times {
+  color: gold;
+  font-size: 2rem;
+}
+
+.nav-links-mobile {
+  display: none;
+}
+
+.menu-icon {
+  display: none;
+}
+
+@media screen and (max-width: 1136px) {
+  .header-main {
+    align-items: center;
+    color: #121212;
+    margin-bottom: 10px;
+  }
+  
+  .navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: -30px -2px 30px -20px;
+  }
+  
+  .brand-logo {
+    display: flex;
+    justify-content: flex-start;
+    min-width: fit-content;
+    align-items: center;
+  }
+  
+  .navbar-logo {
+    color: gold;
+    justify-self: start;
+    cursor: pointer;
+    text-decoration: none;
+    font-style: italic;
+    font-size: 2rem;
+    min-width: fit-content;
+  }
+
+  .navbar-logo h1 {
+    margin: 5px 0px 0px -42px;
+  }
+
+  .nav-menu {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+    height: 50vh;
+    position: absolute;
+    top: 80px;
+    left: -100%;
+    opacity: 1;
+    transition: all 0.5s ease;
+  }
+
+  .nav-menu.active {
+    background: #292929;
+    left: 0;
+    opacity: 1;
+    transition: all 0.5s ease;
+    z-index: 1;
+    margin-top: 50px;
+  }
+
+  .nav-links {
+    text-align: center;
+    padding: 2rem;
+    width: 100%;
+    display: table;
+    margin-left: 0px;
+  }
+
+  .nav-links.active {
+    color: black;
+    background: gold;
+    transition: all 0.2s ease-out;
+    font-weight: bold;
+    width: 100%;
+    padding: 2rem;
+    border-radius: 0px;
+  }
+
+  .nav-links:hover {
+    background-color: gold;
+    color: black;
+    border-radius: 0;
+    padding: 2rem;
+  }
+
+  .navbar-logo {
+    transform: translate(25%, 50%);
+  }
+
+  .menu-icon {
+    display: block;
+    margin-top: 25px;
+    transform: translate(-100%, 60%);
+    font-size: 2rem;
+    cursor: pointer;
+    color: gold;
+  }
+
+  .fa-times {
+    color: gold;
+    font-size: 2rem;
+  }
+
+  .nav-links-mobile {
+    display: block;
+    text-align: center;
+    padding: 1.5rem;
+    margin: 2rem auto;
+    border-radius: 4px;
+    width: 80%;
+    background: black;
+    text-decoration: none;
+    color: gold;
+    font-size: 1.5rem;
+  }
+
+  .nav-links-mobile:hover {
+    background: gold;
+    color: black;
+    transition: 250ms;
+  }
+}
+
 .stonk-links {
   color: black;
   margin-left: 20px;
   text-decoration: none;
   font-weight: normal;
-  background-color: lightgray;
 }
 
 .stonk-links:visited {
   color: black;
   text-decoration: none;
   font-weight: normal;
-  background-color: lightgray;
 }
 
 .body-main {
@@ -99,7 +274,6 @@ span {
 }
 
 .body-content-logreg h1 {
-  background-color: whitesmoke;
   margin-bottom: 20px;
 }
 
@@ -112,7 +286,6 @@ span {
   display: inline-block;
   border-radius: 5px;
   margin-bottom: 20px;
-  background-color: whitesmoke;
 }
 
 .login-input {
@@ -121,7 +294,6 @@ span {
   border-radius: 5px;
   padding: 10px;
   margin-bottom: 20px;
-  background-color: whitesmoke;
 }
 
 .form-subclass {
@@ -134,7 +306,6 @@ span {
 .center-button {
   display: flex;
   justify-content: center;
-  background-color: whitesmoke;
 }
 
 .hover-button {
@@ -147,16 +318,17 @@ span {
   cursor: pointer;
 }
 
+.edit {
+  display: flex;
+  align-items: center;
+}
+
 .edit-button {
   background-color: black;
   color: gold;
-  font-weight: bold;
   padding: 10px;
-  margin-top: 10px;
   border-radius: 5px;
   cursor: pointer;
-  text-decoration: none;
-  height: 40px;
 }
 
 .hover-button:hover {
@@ -172,12 +344,9 @@ span {
 .edit-button:hover {
   background-color: gold;
   color: black;
-  font-weight: bold;
   padding: 10px;
-  margin-top: 10px;
   border-radius: 5px;
   cursor: pointer;
-  text-decoration: none;
 }
 
 .logreg-links {
@@ -185,7 +354,6 @@ span {
   font-style: normal;
   margin-left: 30%;
   color: black;
-  background-color: lightgray;
 }
 
 .body-content-search {
@@ -195,11 +363,9 @@ span {
   margin-bottom: 10px;
   padding: 0px 20px 20px 20px;
   border-radius: 10px;
-  background-color: lightgray;
 }
 
 .body-content-search h1 {
-  background-color: lightgray;
   margin-bottom: 10px;
 }
 
@@ -220,7 +386,6 @@ span {
   height: 100px;
   width: 100%;
   border-bottom: 1px solid black;
-  background-color: lightgray;
 }
 
 .coin {
@@ -228,13 +393,11 @@ span {
   align-items: center;
   min-width: 300px;
   padding-right: 30px;
-  background-color: lightgray;
 }
 
 .coin h2 {
   width: 500px;
   margin-right: 20px;
-  background-color: lightgray;
 }
 
 .coin img {
@@ -242,13 +405,11 @@ span {
   width: 40px;
   margin-right: 5px;
   border-radius: 10px;
-  background-color: lightgray;
 }
 
 .coin-ticker {
   text-transform: uppercase;
   font-weight: normal;
-  background-color: lightgray;
 }
 
 .coin-data {
@@ -257,36 +418,30 @@ span {
   text-align: center;
   align-items:center;
   width: 100%;
-  background-color: lightgray;
 }
 
 .coin-price {
   width: 100px;
   font-weight: normal;
-  background-color: lightgray;
 }
 
 .coin-marketcap{
   width: 100px;
-  background-color: lightgray;
 }
 
 .star {
   height: 20px;
   width: 20px;
-  background-color: lightgray;
 }
 
 .name-ticker {
   display: flex;
   justify-content: left;
   align-items: center;
-  background-color: lightgray;
 }
 
 .name-ticker h1 {
   margin-right: 20px;
-  background-color: lightgray;
   font-weight: normal;
 }
 
@@ -295,18 +450,15 @@ span {
   width: 40px;
   margin-right: 10px;
   border-radius: 10px;
-  background-color: lightgray;
 }
 
 .big-price {
   margin-left: 50px;
-  background-color: lightgray;
 }
 
 .big-mktcap {
   margin-left: 50px;
   margin-top: 5px;
-  background-color: lightgray;
 }
 
 .chart-area {
@@ -328,21 +480,10 @@ span {
   margin-top: 50px;
   margin-bottom: 30px;
   text-align: center;
-  background-color: lightgray;
 }
-
-.price-table th {
-  background-color: lightgray;
-}
-
-.price-table td {
-  background-color: lightgray;
-}
-
 
 .red-numbers {
   color: red;
-  background-color: lightgray;
 }
 
 .delete-button {
@@ -350,14 +491,6 @@ span {
   color: whitesmoke;
   border-radius: 10px;
   margin-left: -20px;
-}
-
-.username-edit {
-  background-color: lightgray;
-}
-
-.username-edit h1 {
-  background-color: lightgray;
 }
 
 .body-profile {
@@ -371,45 +504,32 @@ span {
   justify-content: space-between;
 }
 
-.body-profile-pic {
-  background-color: whitesmoke;
-}
 
 .body-profile-pic img {
   height: 250px;
   width: 250px;
   border-radius: 10px;
-  background-color: whitesmoke;
 }
 
 .profile-details {
   width: 50%;
-  background-color: whitesmoke;
 }
 
 .profile-details-text {
   text-align: center;
-  background-color: whitesmoke;
 }
 
 .profile-details-text h1 {
-  background-color: whitesmoke;
   margin: 20px 0px;
 }
 
-.profile-details-text h2 {
-  background-color: whitesmoke;
-}
-
 .profile-details-text p {
-  background-color: whitesmoke;
   margin-bottom: 20px;
   margin-top: 10px;
 }
 
 .port-header {
   margin-top: 40px;
-  background-color: lightgray;
 }
 
 .username-edit {

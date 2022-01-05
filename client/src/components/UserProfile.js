@@ -47,7 +47,7 @@ const UserProfile = () => {
             <div className="body-main">
                 <div className="username-edit">
                     <h1>{oneUser.username}'s Profile</h1>
-                    <div>
+                    <div className='edit'>
                         <Link to={`/users/update/${userId}`} className="edit-button">
                             <i className='fas fa-edit' />
                         </Link>
