@@ -11,6 +11,64 @@ const UserProfile = () => {
     const [coinData, setCoinData] = useState([]);
     const [userStonkList, setUserStonkList] = useState([]);
     const [oneUser, setOneUser] = useState({});
+    const [buyDate, setBuyDate] = useState("");
+    const [sellDate, setSellDate] = useState("");
+    const [trade, setTrade] = useState({
+        buyData: {},
+        sellData: {},
+        pnl: 0,
+        percent: 0
+    });
+    const [volume, setVolume] = useState(0);
+    const [currency, setCurrency] = useState("");
+
+    const tradeDateUrl = (currency, date) => {
+        return `https://api.coingecko.com/api/v3/coins/${currency}/history?date=${date}&localization=false`;
+    };
+
+    const getTradeData = async (buy, currency, date) => {
+        axios.get(tradeDateUrl(currency, date))
+            .then((res) => {
+                console.log(res.data);
+                if (buy) {
+                    setTrade({ ...trade, buyData: res.data });
+                }
+                else {
+                    setTrade({ ...trade, sellData: res.data });
+                }
+                setBuyDate(res.data);
+                setSellDate(res.data);
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+    };
+
+    const handleCurrencyChange = (e) => {
+        let val = e.target.value;
+        setCurrency(val);
+        getTradeData(null, currency, val);
+    };
+
+    const handleBuyChange = (e) => {
+        let val = e.target.value;
+        setBuyDate(val);
+        getTradeData(true, currency, val);
+    };
+
+    const handleSellChange = (e) => {
+        let val = e.target.value;
+        setSellDate(val);
+        getTradeData(false, currency, val);
+    };
+
+    const tradePnl = () => {
+        setTrade({
+            ...trade,
+            pnl: (trade.sellData.market_data?.current_price.usd - trade.buyData.market_data?.current_price.usd) * volume,
+            percent: (trade.sellData.market_data?.current_price.usd / trade.buyData.market_data?.current_price.usd) - 1,
+        });
+    };
 
     useEffect(() => {
         axios.get(`http://localhost:8000/api/users/${userId}`)
@@ -24,7 +82,7 @@ const UserProfile = () => {
     }, []);
 
     useEffect(() => {
-        axios.get("https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=05&page=1&sparkline=false")
+        axios.get("https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=03&page=1&sparkline=false")
             .then((res) => {
                 setCoinData(res.data);
                 console.log(res.data);
@@ -83,6 +141,34 @@ const UserProfile = () => {
                         )
                     })
                 }
+                <h1 className="port-header">Trade Simulator</h1>
+                <input placeholder="dd-mm-yyyy" defaultValue={buyDate} onChange={(val) => handleBuyChange(val)} />
+                <h1>{trade.buyData.market_data?.current_price.usd.toLocaleString()} USD</h1>
+                <input placeholder="dd-mm-yyyy" defaultValue={sellDate} onChange={(val) => handleSellChange(val)} />
+                <h1>{trade.sellData.market_data?.current_price.usd.toLocaleString()} USD</h1>
+                <input placeholder="insert number" onChange={(e) => setVolume(e.target.value)} />
+                <h1>{volume}</h1>
+                <button onClick={tradePnl}>Execute Trade</button>
+                <div>
+                    {
+                        trade.pnl < 0 ?
+                            <div>
+                                <h1>Loss:</h1>
+                                <h1 className='red-numbers'>{trade.pnl.toLocaleString()} USD</h1>
+                            </div>
+                            :
+                            <div>
+                                <h1>Profit:</h1>
+                                <h1>{trade.pnl.toLocaleString()} USD</h1>
+                            </div>
+                    }
+                    {
+                        trade.percent < 0 ?
+                            <h1 className='red-numbers'>{trade.percent.toLocaleString()} %</h1>
+                            : <h1>{trade.percent.toLocaleString()} %</h1>
+                    }
+                </div>
+                <input placeholder="currency (lowercase)" onChange={(val) => handleCurrencyChange(val)} />
             </div>
         </div>
     )

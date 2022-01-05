@@ -264,7 +264,7 @@ span {
 
 .body-content-logreg {
   border: 2px solid gold;
-  background-color: whitesmoke;
+  background-color: #7c7a7a;
   width: 40%;
   min-height: 300px;
   margin: auto;
@@ -275,10 +275,7 @@ span {
 
 .body-content-logreg h1 {
   margin-bottom: 20px;
-}
-
-.logregform {
-  background-color: whitesmoke;
+  text-align: center;
 }
 
 .form-labels {
@@ -286,6 +283,7 @@ span {
   display: inline-block;
   border-radius: 5px;
   margin-bottom: 20px;
+  font-weight: bold;
 }
 
 .login-input {
@@ -316,6 +314,7 @@ span {
   margin-top: 10px;
   border-radius: 5px;
   cursor: pointer;
+  transition: all 0.2s ease-out;
 }
 
 .edit {
@@ -339,6 +338,7 @@ span {
   margin-top: 10px;
   border-radius: 5px;
   cursor: pointer;
+  transition: all 0.2s ease-out;
 }
 
 .edit-button:hover {
@@ -347,6 +347,7 @@ span {
   padding: 10px;
   border-radius: 5px;
   cursor: pointer;
+  transition: all 0.2s ease-out;
 }
 
 .logreg-links {
@@ -367,16 +368,13 @@ span {
 
 .body-content-search h1 {
   margin-bottom: 10px;
-}
-
-.search-form {
-  background-color: lightgray;
+  text-align: center;
 }
 
 .coin-container {
   display: flex;
   justify-content: center;
-  background-color: lightgray;
+  padding: 0px 20px;
 }
 
 .coin-row {
@@ -429,9 +427,12 @@ span {
   width: 100px;
 }
 
-.star {
-  height: 20px;
-  width: 20px;
+.fav-star {
+  margin-right: -50px;
+}
+
+.fav-star:hover {
+  cursor: pointer;
 }
 
 .name-ticker {
@@ -495,7 +496,7 @@ span {
 
 .body-profile {
   border: 2px solid gold;
-  background-color: whitesmoke;
+  background-color: #7c7a7a;
   width: 95%;
   margin-top: 30px;
   padding: 20px;
@@ -504,11 +505,11 @@ span {
   justify-content: space-between;
 }
 
-
 .body-profile-pic img {
   height: 250px;
   width: 250px;
   border-radius: 10px;
+  border: 2px solid black;
 }
 
 .profile-details {
