@@ -295,11 +295,16 @@ span {
 
 .pnl {
   margin-top: 30px;
+  border: 2px solid black;
+  border-radius: 10px;
+  margin: auto;
+  padding: 20px;
+  margin: 20px 0px 0px 20px;
 }
 
 .pnl h1 {
-  text-align: center;
-  margin-bottom: 30px;
+  text-align: left;
+  margin-bottom: 10px;
 }
 
 .pnl h2 {

@@ -222,15 +222,16 @@ const UserProfile = () => {
                             />
                         </div>
                         <div className='pnl'>
+                            <h1>Results:</h1>
                             {
                                 trade.pnl < 0 ?
                                     <div>
-                                        <h1>Loss:</h1>
+                                        <h2>Loss</h2>
                                         <h2 className='red-numbers'>{trade.pnl.toLocaleString()} USD</h2>
                                     </div>
                                     :
                                     <div>
-                                        <h1>Profit:</h1>
+                                        <h2>Profit</h2>
                                         <h2>{trade.pnl.toLocaleString()} USD</h2>
                                     </div>
                             }
