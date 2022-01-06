@@ -23,8 +23,6 @@ const DisplayOne = () => {
     useEffect(() => {
         axios.get(`https://api.coingecko.com/api/v3/coins/${id}`)
             .then((res) => {
-                console.log(res);
-                console.log(res.data);
                 setStonk(res.data);
                 setImageData(res.data.image.small);
                 setPriceData(res.data.market_data.current_price);
@@ -41,9 +39,6 @@ const DisplayOne = () => {
     useEffect(() => {
         axios.get(`https://api.coingecko.com/api/v3/coins/${id}/market_chart?vs_currency=usd&days=365&interval=daily`)
             .then((res) => {
-                console.log(res);
-                console.log(res.data.prices);
-                console.log(res.data.prices[0]);
                 setChartData(res.data.prices);
             })
             .catch((err) => console.log(err));
@@ -51,7 +46,6 @@ const DisplayOne = () => {
 
     useEffect(() => {
         setUserId(localStorage.getItem("userId"));
-        console.log(localStorage.getItem("userId"));
     }, []);
 
     return (

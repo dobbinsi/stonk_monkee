@@ -4,7 +4,6 @@ import PortfolioView from '../components/PortfolioView';
 
 const UserView = (props) => {
     const { userId } = props;
-    // const [userStonkList, setUserStonkList] = useState([]);
 
     return (
         <div>

@@ -22,18 +22,15 @@ const CreateStonk = () => {
         axios.post(`http://localhost:8000/api/stonks/new`, newStonk,
             { withCredentials: true })
             .then((res) => {
-                console.log(res.data);
                 navigate("/stonks/home");
             })
             .catch((err) => {
-                console.log(err);
                 setErrors(err.response.data.errors);
             })
     };
 
     useEffect(() => {
-        setUserId(localStorage.getItem("userId", userId));
-        console.log(localStorage.getItem("userId"));
+        setUserId(localStorage.getItem("userId"));
     }, []);
 
     return (

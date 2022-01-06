@@ -15,14 +15,12 @@ const DisplayAll = () => {
 
     useEffect(() => {
         setUserId(localStorage.getItem("userId"));
-        console.log(localStorage.getItem("userId"));
     }, []);
 
     useEffect(() => {
         axios.get("https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=2000&page=1&sparkline=false")
             .then((res) => {
                 setCoinData(res.data);
-                console.log(res.data);
             })
             .catch((err) => console.log(err));
     }, []);
@@ -30,8 +28,6 @@ const DisplayAll = () => {
     useEffect(() => {
         axios.get("http://localhost:8000/api/stonks")
             .then((res) => {
-                console.log(res);
-                console.log(res.data);
                 setStonkList(res.data);
             })
             .catch((err) => console.log(err));
@@ -48,7 +44,6 @@ const DisplayAll = () => {
     const deleteStonk = (idFromBelow) => {
         axios.delete(`http://localhost:8000/api/stonks/${idFromBelow}`)
             .then((res) => {
-                console.log(res.data);
                 const newList = stonkList.filter((stonk, index) => stonk._id !== idFromBelow);
                 setStonkList(newList);
             })

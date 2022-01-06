@@ -11,7 +11,7 @@ import { Chart as ChartJS } from 'chart.js/auto';
 const UserProfile = () => {
     const { userId } = useParams();
     const [coinData, setCoinData] = useState([]);
-    const [userStonkList, setUserStonkList] = useState([]);
+    // const [userStonkList, setUserStonkList] = useState([]);
     const [oneUser, setOneUser] = useState({});
     const [buyDate, setBuyDate] = useState("");
     const [sellDate, setSellDate] = useState("");
@@ -52,9 +52,9 @@ const UserProfile = () => {
     const getTimestamp = async (buyDate, sellDate) => {
         const utcBuyDate = new Date(buyDate);
         const newBuyDate = utcBuyDate.toLocaleString("es-CL");
-        console.log(newBuyDate);
         const utcSellDate = new Date(sellDate);
         const newSellDate = utcSellDate.toLocaleString("es-CL");
+        // converting like this leads to invalid date errors for days > 12
         const buyTime = Math.floor(new Date(newBuyDate).getTime() / 1000);
         const sellTime = Math.floor(new Date(newSellDate).getTime() / 1000);
         console.log(buyTime);

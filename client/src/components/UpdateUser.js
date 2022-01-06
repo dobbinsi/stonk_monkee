@@ -9,7 +9,6 @@ import UserForm from "./UserForm";
 const UpdateUser = () => {
     const { userId } = useParams();
     const [errors, setErrors] = useState({});
-    const navigate = useNavigate();
     const [updatedUser, setUpdatedUser] = useState({
         username: "",
         email: "",
@@ -19,6 +18,7 @@ const UpdateUser = () => {
         experience: "",
         quote: "",
     });
+    const navigate = useNavigate();
 
     useEffect(() => {
         axios.get(`http://localhost:8000/api/users/${userId}`)
