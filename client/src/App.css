@@ -278,6 +278,38 @@ span {
   text-align: center;
 }
 
+.body-content-trade {
+  border: 2px solid gold;
+  background-color: #7c7a7a;
+  width: 30%;
+  min-height: 300px;
+  margin-top: 30px;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.body-content-trade h3 {
+  margin-top: -10px;
+  text-align: right;
+}
+
+.pnl {
+  margin-top: 30px;
+}
+
+.pnl h1 {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.pnl h2 {
+  text-align:center;
+}
+
+.trade-sim {
+  display: flex;
+}
+
 .form-labels {
   width: 100%;
   display: inline-block;
@@ -317,6 +349,17 @@ span {
   transition: all 0.2s ease-out;
 }
 
+.hover-button-trade {
+  background-color: black;
+  color: gold;
+  font-weight: bold;
+  padding: 10px;
+  margin-top: 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.2s ease-out;
+}
+
 .edit {
   display: flex;
   align-items: center;
@@ -336,6 +379,17 @@ span {
   font-weight: bold;
   padding: 10px;
   margin-top: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.2s ease-out;
+}
+
+.hover-button-trade:hover {
+  background-color: gold;
+  color: black;
+  font-weight: bold;
+  padding: 10px;
+  margin-top: 20px;
   border-radius: 5px;
   cursor: pointer;
   transition: all 0.2s ease-out;
@@ -469,6 +523,18 @@ span {
   border-radius: 10px;
 }
 
+.chart-area-trade {
+  background-color: black;
+  padding: 20px;
+  margin-top: 30px;
+  margin-left: 20px;
+  border-radius: 10px;
+}
+
+.trade-results {
+  width: 70%;
+}
+
 .price-change {
   width: 100%;
   display: flex;
@@ -485,13 +551,6 @@ span {
 
 .red-numbers {
   color: red;
-}
-
-.delete-button {
-  background-color: red;
-  color: whitesmoke;
-  border-radius: 10px;
-  margin-left: -20px;
 }
 
 .body-profile {

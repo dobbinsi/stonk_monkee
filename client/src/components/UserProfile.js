@@ -4,6 +4,8 @@ import { NavLink as Link } from "react-router-dom";
 import Header from './Header';
 import { useParams } from "react-router-dom";
 import AllCoins from "./AllCoins";
+import { Line } from "react-chartjs-2";
+import { Chart as ChartJS } from 'chart.js/auto';
 
 
 const UserProfile = () => {
@@ -21,9 +23,14 @@ const UserProfile = () => {
     });
     const [volume, setVolume] = useState(0);
     const [currency, setCurrency] = useState("");
+    const [timeStampData, setTimeStampData] = useState([]);
 
     const tradeDateUrl = (currency, date) => {
         return `https://api.coingecko.com/api/v3/coins/${currency}/history?date=${date}&localization=false`;
+    };
+
+    const timeStampUrl = (currency, buyTime, sellTime) => {
+        return `https://api.coingecko.com/api/v3/coins/${currency}/market_chart/range?vs_currency=usd&from=${buyTime}&to=${sellTime}`;
     };
 
     const getTradeData = async (buy, currency, date) => {
@@ -36,12 +43,26 @@ const UserProfile = () => {
                 else {
                     setTrade({ ...trade, sellData: res.data });
                 }
-                setBuyDate(res.data);
-                setSellDate(res.data);
             })
             .catch((err) => {
                 console.log(err);
             });
+    };
+
+    const getTimestamp = async (buyDate, sellDate) => {
+        let buyTime = Math.floor(new Date(buyDate).getTime() / 1000);
+        let sellTime = Math.floor(new Date(sellDate).getTime() / 1000);
+        console.log(buyTime);
+        console.log(sellTime);
+        console.log(currency);
+        axios.get(timeStampUrl(currency, buyTime, sellTime))
+            .then((res) => {
+                console.log(res.data.prices);
+                setTimeStampData(res.data.prices);
+            })
+            .catch((err) => {
+                console.log(err);
+            })
     };
 
     const handleCurrencyChange = (e) => {
@@ -66,8 +87,11 @@ const UserProfile = () => {
         setTrade({
             ...trade,
             pnl: (trade.sellData.market_data?.current_price.usd - trade.buyData.market_data?.current_price.usd) * volume,
-            percent: (trade.sellData.market_data?.current_price.usd / trade.buyData.market_data?.current_price.usd) - 1,
+            percent: ((trade.sellData.market_data?.current_price.usd / trade.buyData.market_data?.current_price.usd) - 1) * 100,
         });
+        console.log(buyDate);
+        console.log(sellDate);
+        getTimestamp(buyDate, sellDate);
     };
 
     useEffect(() => {
@@ -142,33 +166,77 @@ const UserProfile = () => {
                     })
                 }
                 <h1 className="port-header">Trade Simulator</h1>
-                <input placeholder="dd-mm-yyyy" defaultValue={buyDate} onChange={(val) => handleBuyChange(val)} />
-                <h1>{trade.buyData.market_data?.current_price.usd.toLocaleString()} USD</h1>
-                <input placeholder="dd-mm-yyyy" defaultValue={sellDate} onChange={(val) => handleSellChange(val)} />
-                <h1>{trade.sellData.market_data?.current_price.usd.toLocaleString()} USD</h1>
-                <input placeholder="insert number" onChange={(e) => setVolume(e.target.value)} />
-                <h1>{volume}</h1>
-                <button onClick={tradePnl}>Execute Trade</button>
-                <div>
-                    {
-                        trade.pnl < 0 ?
-                            <div>
-                                <h1>Loss:</h1>
-                                <h1 className='red-numbers'>{trade.pnl.toLocaleString()} USD</h1>
-                            </div>
-                            :
-                            <div>
-                                <h1>Profit:</h1>
-                                <h1>{trade.pnl.toLocaleString()} USD</h1>
-                            </div>
-                    }
-                    {
-                        trade.percent < 0 ?
-                            <h1 className='red-numbers'>{trade.percent.toLocaleString()} %</h1>
-                            : <h1>{trade.percent.toLocaleString()} %</h1>
-                    }
+                <div className='trade-sim'>
+                    <div className="body-content-trade">
+                        <div className="logregform">
+                            <label className="form-labels">Currency:</label>
+                            <input className="login-input" placeholder="currency (lowercase)" onChange={(val) => handleCurrencyChange(val)} />
+                        </div>
+                        <div className="logregform">
+                            <label className="form-labels">Buy Date:</label>
+                            <input className="login-input" placeholder="dd-mm-yyyy" defaultValue={buyDate} onChange={(val) => handleBuyChange(val)} />
+                            <h3>{trade.buyData.market_data?.current_price.usd.toLocaleString()} USD</h3>
+                        </div>
+                        <div className="logregform">
+                            <label className="form-labels">Sell Date:</label>
+                            <input className="login-input" placeholder="dd-mm-yyyy" defaultValue={sellDate} onChange={(val) => handleSellChange(val)} />
+                            <h3>{trade.sellData.market_data?.current_price.usd.toLocaleString()} USD</h3>
+                        </div>
+                        <div className="logregform">
+                            <label className="form-labels">Volume:</label>
+                            <input className="login-input" placeholder="insert number" onChange={(e) => setVolume(e.target.value)} />
+                            <h3>{volume} coins</h3>
+                        </div>
+                        <div className="center-button">
+                            <button class="hover-button-trade" onClick={tradePnl}>Execute Trade</button>
+                        </div>
+                    </div>
+                    <div className='trade-results'>
+                        <div className="chart-area-trade">
+                            <Line
+                                data={{
+                                    labels: timeStampData.map((coin) => {
+                                        let date = new Date(coin[0]);
+                                        return date.toLocaleDateString();
+                                    }),
+                                    datasets: [
+                                        {
+                                            data: timeStampData.map((coin) => coin[1]),
+                                            label: "Price (USD)",
+                                            borderColor: "gold",
+                                        },
+                                    ],
+                                }}
+                                options={{
+                                    elements: {
+                                        point: {
+                                            radius: 2,
+                                        },
+                                    },
+                                }}
+                            />
+                        </div>
+                        <div className='pnl'>
+                            {
+                                trade.pnl < 0 ?
+                                    <div>
+                                        <h1>Loss:</h1>
+                                        <h2 className='red-numbers'>{trade.pnl.toLocaleString()} USD</h2>
+                                    </div>
+                                    :
+                                    <div>
+                                        <h1>Profit:</h1>
+                                        <h2>{trade.pnl.toLocaleString()} USD</h2>
+                                    </div>
+                            }
+                            {
+                                trade.percent < 0 ?
+                                    <h2 className='red-numbers'>{trade.percent.toLocaleString()} %</h2>
+                                    : <h2>{trade.percent.toLocaleString()} %</h2>
+                            }
+                        </div>
+                    </div>
                 </div>
-                <input placeholder="currency (lowercase)" onChange={(val) => handleCurrencyChange(val)} />
             </div>
         </div>
     )

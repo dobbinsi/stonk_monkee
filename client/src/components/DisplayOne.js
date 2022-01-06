@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import Header from "./Header";
 import { Line } from "react-chartjs-2";
-import { Chart as ChartJS } from 'chart.js/auto'
+import { Chart as ChartJS } from 'chart.js/auto';
 
 
 const DisplayOne = () => {
