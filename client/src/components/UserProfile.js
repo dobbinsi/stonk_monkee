@@ -50,14 +50,19 @@ const UserProfile = () => {
     };
 
     const getTimestamp = async (buyDate, sellDate) => {
-        let buyTime = Math.floor(new Date(buyDate).getTime() / 1000);
-        let sellTime = Math.floor(new Date(sellDate).getTime() / 1000);
+        const utcBuyDate = new Date(buyDate);
+        const newBuyDate = utcBuyDate.toLocaleString("es-CL");
+        console.log(newBuyDate);
+        const utcSellDate = new Date(sellDate);
+        const newSellDate = utcSellDate.toLocaleString("es-CL");
+        const buyTime = Math.floor(new Date(newBuyDate).getTime() / 1000);
+        const sellTime = Math.floor(new Date(newSellDate).getTime() / 1000);
         console.log(buyTime);
         console.log(sellTime);
         console.log(currency);
         axios.get(timeStampUrl(currency, buyTime, sellTime))
             .then((res) => {
-                console.log(res.data.prices);
+                console.log(res.data);
                 setTimeStampData(res.data.prices);
             })
             .catch((err) => {
