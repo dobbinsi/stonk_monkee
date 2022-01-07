@@ -14,3 +14,6 @@ StonkMonkee is a cryptocurrency price tracker and trade simulator powered by the
 </ul>
 
 <h2>Demo:</h2>
+![stonkmonkee_home](https://user-images.githubusercontent.com/86622263/148603572-062ae62c-af16-488b-91aa-ccabe059247e.gif)
+<br></br>
+![stonkmonkee_profile](https://user-images.githubusercontent.com/86622263/148603649-dd852f56-b838-44ad-8d13-8283f046b685.gif)
